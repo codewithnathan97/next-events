@@ -1,3 +1,5 @@
+# Next-Events
+
 This repository contains the code for Next-Events, a web application to list events.
 
 It's a part of the _Beginning Next.js Development_ book

@@ -1,0 +1,20 @@
+{
+  "status": "commited",
+  "type": "frontend",
+  "scope": "codebase",
+  "localEndpoint": "http://localhost:3000",
+  "loginUser": "nathan@mail.com",
+  "loginPassword": "nathan789",
+  "executionArgs": {
+    "projectName": "next-events",
+    "projectPath": "/Users/nathan/Desktop/DEV/3_beginning_next/next-events",
+    "testIds": [],
+    "additionalInstruction": "",
+    "serverMode": "development",
+    "envs": {
+      "API_KEY": "sk-user-AkOugMwyqi2ZTTtaNFT2bKUrJdxa9i3o_FP-PeSg7Bfyj2f8E-o3kzWqh4sMMAvXY9k0ShROEmVczm0lmDQkeIh_nVOeqzivibPKtiG11QFrXB9jhBnwleXlLjtTTVLmVN4"
+    }
+  },
+  "serverPort": 59609,
+  "proxy": "http://b78f79a9-d06a-490a-8ae7-2ba804bf9ec8:yor4X1g8VbMVM0Fgp3jD8gN4xb96wRBJ@tun.testsprite.com:8080"
+}

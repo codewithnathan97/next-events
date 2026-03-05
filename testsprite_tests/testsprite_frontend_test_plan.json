@@ -1,0 +1,1704 @@
+[
+  {
+    "id": "TC001",
+    "title": "Successful login redirects to Profile with success toast",
+    "description": "Verifies a user can log in with valid credentials, sees a success toast, and is redirected to the profile page.",
+    "category": "User Login",
+    "priority": "High",
+    "steps": [
+      {
+        "type": "action",
+        "description": "Navigate to /login"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify URL contains \"/login\""
+      },
+      {
+        "type": "action",
+        "description": "Type \"{{LOGIN_USER}}\" into the email field"
+      },
+      {
+        "type": "action",
+        "description": "Type \"{{LOGIN_PASSWORD}}\" into the password field"
+      },
+      {
+        "type": "action",
+        "description": "Click on the \"Log In\" button"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify text \"success\" is visible"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify URL contains \"/profile\""
+      }
+    ]
+  },
+  {
+    "id": "TC002",
+    "title": "Invalid password shows error toast and stays on Login page",
+    "description": "Verifies an incorrect password produces an invalid-credentials error and does not redirect away from the login page.",
+    "category": "User Login",
+    "priority": "High",
+    "steps": [
+      {
+        "type": "action",
+        "description": "Navigate to /login"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify URL contains \"/login\""
+      },
+      {
+        "type": "action",
+        "description": "Type \"{{LOGIN_USER}}\" into the email field"
+      },
+      {
+        "type": "action",
+        "description": "Type \"wrong-password-123\" into the password field"
+      },
+      {
+        "type": "action",
+        "description": "Click on the \"Log In\" button"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify text \"invalid\" is visible"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify URL contains \"/login\""
+      }
+    ]
+  },
+  {
+    "id": "TC003",
+    "title": "Non-existent user shows error toast and stays on Login page",
+    "description": "Verifies a non-existent email cannot log in and an error toast is displayed without redirecting.",
+    "category": "User Login",
+    "priority": "Medium",
+    "steps": [
+      {
+        "type": "action",
+        "description": "Navigate to /login"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify URL contains \"/login\""
+      },
+      {
+        "type": "action",
+        "description": "Type \"no.user.404@example.com\" into the email field"
+      },
+      {
+        "type": "action",
+        "description": "Type \"SomePassword!123\" into the password field"
+      },
+      {
+        "type": "action",
+        "description": "Click on the \"Log In\" button"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify text \"invalid\" is visible"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify URL contains \"/login\""
+      }
+    ]
+  },
+  {
+    "id": "TC004",
+    "title": "Submitting with empty email shows visible validation/error and no redirect",
+    "description": "Verifies the login form cannot be submitted successfully when the email field is empty.",
+    "category": "User Login",
+    "priority": "High",
+    "steps": [
+      {
+        "type": "action",
+        "description": "Navigate to /login"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify URL contains \"/login\""
+      },
+      {
+        "type": "action",
+        "description": "Type \"{{LOGIN_PASSWORD}}\" into the password field"
+      },
+      {
+        "type": "action",
+        "description": "Click on the \"Log In\" button"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify URL contains \"/login"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify text \"email\" is visible"
+      }
+    ]
+  },
+  {
+    "id": "TC005",
+    "title": "Submitting with empty password shows visible validation/error and no redirect",
+    "description": "Verifies the login form cannot be submitted successfully when the password field is empty.",
+    "category": "User Login",
+    "priority": "High",
+    "steps": [
+      {
+        "type": "action",
+        "description": "Navigate to /login"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify URL contains \"/login\""
+      },
+      {
+        "type": "action",
+        "description": "Type \"{{LOGIN_USER}}\" into the email field"
+      },
+      {
+        "type": "action",
+        "description": "Click on the \"Log In\" button"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify URL contains \"/login\""
+      },
+      {
+        "type": "assertion",
+        "description": "Verify text \"password\" is visible"
+      }
+    ]
+  },
+  {
+    "id": "TC006",
+    "title": "Leading/trailing spaces in email still allow successful login",
+    "description": "Verifies the login flow succeeds when the email input includes leading/trailing spaces (common user input issue).",
+    "category": "User Login",
+    "priority": "Medium",
+    "steps": [
+      {
+        "type": "action",
+        "description": "Navigate to /login"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify URL contains \"/login\""
+      },
+      {
+        "type": "action",
+        "description": "Type \"  {{LOGIN_USER}}  \" into the email field"
+      },
+      {
+        "type": "action",
+        "description": "Type \"{{LOGIN_PASSWORD}}\" into the password field"
+      },
+      {
+        "type": "action",
+        "description": "Click on the \"Log In\" button"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify URL contains \"/profile\""
+      },
+      {
+        "type": "assertion",
+        "description": "Verify text \"success\" is visible"
+      }
+    ]
+  },
+  {
+    "id": "TC007",
+    "title": "Login via Enter key submits the form and redirects on success",
+    "description": "Verifies pressing Enter in the password field submits the login form and completes the success flow.",
+    "category": "User Login",
+    "priority": "Medium",
+    "steps": [
+      {
+        "type": "action",
+        "description": "Navigate to /login"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify URL contains \"/login\""
+      },
+      {
+        "type": "action",
+        "description": "Type \"{{LOGIN_USER}}\" into the email field"
+      },
+      {
+        "type": "action",
+        "description": "Type \"{{LOGIN_PASSWORD}}\" into the password field"
+      },
+      {
+        "type": "action",
+        "description": "Press \"Enter\""
+      },
+      {
+        "type": "assertion",
+        "description": "Verify text \"success\" is visible"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify URL contains \"/profile\""
+      }
+    ]
+  },
+  {
+    "id": "TC008",
+    "title": "Successful sign out from navbar dropdown updates navbar to logged-out state",
+    "description": "Verifies an authenticated user can sign out from the navbar avatar dropdown and the navbar updates to show Login and Sign Up links.",
+    "category": "User Sign Out",
+    "priority": "High",
+    "steps": [
+      {
+        "type": "action",
+        "description": "Navigate to /login"
+      },
+      {
+        "type": "action",
+        "description": "Type \"{{LOGIN_USER}}\" into the email field"
+      },
+      {
+        "type": "action",
+        "description": "Type \"{{LOGIN_PASSWORD}}\" into the password field"
+      },
+      {
+        "type": "action",
+        "description": "Click the \"Login\" button"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify URL contains \"/\""
+      },
+      {
+        "type": "action",
+        "description": "Click the avatar in the navbar to open the dropdown"
+      },
+      {
+        "type": "action",
+        "description": "Click the \"Sign Out\" option"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify text \"signed out\" is visible"
+      }
+    ]
+  },
+  {
+    "id": "TC009",
+    "title": "After signing out, navbar shows Login and Sign Up links on the home page",
+    "description": "Verifies the logged-out navbar state is visible after signing out from the avatar dropdown.",
+    "category": "User Sign Out",
+    "priority": "High",
+    "steps": [
+      {
+        "type": "action",
+        "description": "Navigate to /login"
+      },
+      {
+        "type": "action",
+        "description": "Type \"{{LOGIN_USER}}\" into the email field"
+      },
+      {
+        "type": "action",
+        "description": "Type \"{{LOGIN_PASSWORD}}\" into the password field"
+      },
+      {
+        "type": "action",
+        "description": "Click the \"Login\" button"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify URL contains \"/\""
+      },
+      {
+        "type": "action",
+        "description": "Click the avatar in the navbar to open the dropdown"
+      },
+      {
+        "type": "action",
+        "description": "Click the \"Sign Out\" option"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify element \"Login\" is visible"
+      }
+    ]
+  },
+  {
+    "id": "TC010",
+    "title": "Sign out is accessible from avatar dropdown on the home page",
+    "description": "Verifies the avatar dropdown opens and the Sign Out option is visible for an authenticated user.",
+    "category": "User Sign Out",
+    "priority": "Medium",
+    "steps": [
+      {
+        "type": "action",
+        "description": "Navigate to /login"
+      },
+      {
+        "type": "action",
+        "description": "Type \"{{LOGIN_USER}}\" into the email field"
+      },
+      {
+        "type": "action",
+        "description": "Type \"{{LOGIN_PASSWORD}}\" into the password field"
+      },
+      {
+        "type": "action",
+        "description": "Click the \"Login\" button"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify URL contains \"/\""
+      },
+      {
+        "type": "action",
+        "description": "Click the avatar in the navbar to open the dropdown"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify element \"Sign Out\" is visible"
+      }
+    ]
+  },
+  {
+    "id": "TC011",
+    "title": "Signing out keeps user on a stable page state and shows logged-out navigation options",
+    "description": "Verifies sign out does not break navigation and the user can see Sign Up link after signing out.",
+    "category": "User Sign Out",
+    "priority": "Medium",
+    "steps": [
+      {
+        "type": "action",
+        "description": "Navigate to /login"
+      },
+      {
+        "type": "action",
+        "description": "Type \"{{LOGIN_USER}}\" into the email field"
+      },
+      {
+        "type": "action",
+        "description": "Type \"{{LOGIN_PASSWORD}}\" into the password field"
+      },
+      {
+        "type": "action",
+        "description": "Click the \"Login\" button"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify URL contains \"/\""
+      },
+      {
+        "type": "action",
+        "description": "Click the avatar in the navbar to open the dropdown"
+      },
+      {
+        "type": "action",
+        "description": "Click the \"Sign Out\" option"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify element \"Sign Up\" is visible"
+      }
+    ]
+  },
+  {
+    "id": "TC012",
+    "title": "Browse events list shows event cards with key summary fields",
+    "description": "Verifies the home page renders event cards and each card displays core summary information.",
+    "category": "Browse Events",
+    "priority": "High",
+    "steps": [
+      {
+        "type": "action",
+        "description": "Navigate to /"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify page title contains \"Next-Events\""
+      },
+      {
+        "type": "assertion",
+        "description": "Verify element \"event card\" is visible"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify element \"event card title\" is visible"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify element \"event card category\" is visible"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify element \"event card date\" is visible"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify element \"event card description\" is visible"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify element \"event card image\" is visible"
+      }
+    ]
+  },
+  {
+    "id": "TC013",
+    "title": "Learn More navigates from an event card to the event detail page",
+    "description": "Verifies that clicking Learn More on an event card navigates to the event details page.",
+    "category": "Browse Events",
+    "priority": "High",
+    "steps": [
+      {
+        "type": "action",
+        "description": "Navigate to /"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify element \"event card\" is visible"
+      },
+      {
+        "type": "action",
+        "description": "Click on \"Learn More\" button on the first visible event card"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify URL contains \"/events/\""
+      },
+      {
+        "type": "assertion",
+        "description": "Verify element \"event detail title\" is visible"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify element \"event detail image\" is visible"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify element \"event detail description\" is visible"
+      }
+    ]
+  },
+  {
+    "id": "TC014",
+    "title": "Event card shows a visible Learn More action",
+    "description": "Verifies that event cards provide a Learn More action users can click.",
+    "category": "Browse Events",
+    "priority": "Medium",
+    "steps": [
+      {
+        "type": "action",
+        "description": "Navigate to /"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify element \"event card\" is visible"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify element \"Learn More\" button is visible on an event card"
+      },
+      {
+        "type": "action",
+        "description": "Scroll to the bottom of the events list"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify element \"Learn More\" button is visible on a lower event card"
+      }
+    ]
+  },
+  {
+    "id": "TC015",
+    "title": "No events state shows a no-results message",
+    "description": "Verifies that when there are no events to display, the home page shows a clear no-events message instead of cards.",
+    "category": "Browse Events",
+    "priority": "High",
+    "steps": [
+      {
+        "type": "action",
+        "description": "Navigate to /"
+      },
+      {
+        "type": "action",
+        "description": "Wait for page content to load"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify text \"No events found\" is visible"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify element \"event card\" is not visible"
+      }
+    ]
+  },
+  {
+    "id": "TC016",
+    "title": "Event card summary content remains visible after scrolling",
+    "description": "Verifies that scrolling the home page does not break visibility of event card summary fields.",
+    "category": "Browse Events",
+    "priority": "Low",
+    "steps": [
+      {
+        "type": "action",
+        "description": "Navigate to /"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify element \"event card\" is visible"
+      },
+      {
+        "type": "action",
+        "description": "Scroll to the bottom of the page"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify element \"event card title\" is visible"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify element \"event card category\" is visible"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify element \"event card date\" is visible"
+      }
+    ]
+  },
+  {
+    "id": "TC017",
+    "title": "Open an event detail page from the home event list",
+    "description": "Verifies a user can open an event detail page and see core event information.",
+    "category": "View Event Detail",
+    "priority": "High",
+    "steps": [
+      {
+        "type": "action",
+        "description": "Navigate to /"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify text \"Events\" is visible"
+      },
+      {
+        "type": "action",
+        "description": "Click on an event card title in the event list"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify URL contains \"/events/\""
+      },
+      {
+        "type": "assertion",
+        "description": "Verify element \"event title\" is visible"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify element \"event description\" is visible"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify element \"event location\" is visible"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify element \"organizer name\" is visible"
+      }
+    ]
+  },
+  {
+    "id": "TC018",
+    "title": "Event detail shows image, category, and date information",
+    "description": "Verifies the event detail page renders key metadata like image, category, and dates.",
+    "category": "View Event Detail",
+    "priority": "High",
+    "steps": [
+      {
+        "type": "action",
+        "description": "Navigate to /"
+      },
+      {
+        "type": "action",
+        "description": "Click on an event card title in the event list"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify URL contains \"/events/\""
+      },
+      {
+        "type": "assertion",
+        "description": "Verify element \"event image\" is visible"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify element \"event category\" is visible"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify element \"event start date\" is visible"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify element \"event end date\" is visible"
+      }
+    ]
+  },
+  {
+    "id": "TC019",
+    "title": "Related events section is visible on event detail page",
+    "description": "Verifies the related events section is present and shows event cards.",
+    "category": "View Event Detail",
+    "priority": "High",
+    "steps": [
+      {
+        "type": "action",
+        "description": "Navigate to /"
+      },
+      {
+        "type": "action",
+        "description": "Click on an event card title in the event list"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify URL contains \"/events/\""
+      },
+      {
+        "type": "action",
+        "description": "Scroll to the bottom of the page"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify text \"Related Events\" is visible"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify element \"related event card\" is visible"
+      }
+    ]
+  },
+  {
+    "id": "TC020",
+    "title": "Navigate from a related event card to another event detail",
+    "description": "Verifies a user can open an event detail page by clicking a related event card.",
+    "category": "View Event Detail",
+    "priority": "Medium",
+    "steps": [
+      {
+        "type": "action",
+        "description": "Navigate to /"
+      },
+      {
+        "type": "action",
+        "description": "Click on an event card title in the event list"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify URL contains \"/events/\""
+      },
+      {
+        "type": "action",
+        "description": "Scroll to the bottom of the page"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify element \"related event card\" is visible"
+      },
+      {
+        "type": "action",
+        "description": "Click on a related event card title"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify URL contains \"/events/\""
+      },
+      {
+        "type": "assertion",
+        "description": "Verify element \"event title\" is visible"
+      }
+    ]
+  },
+  {
+    "id": "TC021",
+    "title": "Non-organizer does not see Edit and Delete controls on event detail",
+    "description": "Verifies the event detail page does not display organizer-only controls to a regular viewer.",
+    "category": "View Event Detail",
+    "priority": "High",
+    "steps": [
+      {
+        "type": "action",
+        "description": "Navigate to /"
+      },
+      {
+        "type": "action",
+        "description": "Click on an event card title in the event list"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify URL contains \"/events/\""
+      },
+      {
+        "type": "assertion",
+        "description": "Verify element \"event title\" is visible"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify element \"Edit\" is not visible"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify element \"Delete\" is not visible"
+      }
+    ]
+  },
+  {
+    "id": "TC022",
+    "title": "Event detail handles invalid/nonexistent event by showing not found state",
+    "description": "Verifies the application shows a visible not-found/404 style message for a nonexistent event.",
+    "category": "View Event Detail",
+    "priority": "High",
+    "steps": [
+      {
+        "type": "action",
+        "description": "Navigate to /"
+      },
+      {
+        "type": "action",
+        "description": "Type \"nonexistent-id\" into the search field"
+      },
+      {
+        "type": "action",
+        "description": "Press Enter"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify text \"No events\" is visible"
+      },
+      {
+        "type": "action",
+        "description": "Click on the site logo to return to the home event list"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify URL contains \"/\""
+      },
+      {
+        "type": "assertion",
+        "description": "Verify text \"Events\" is visible"
+      }
+    ]
+  },
+  {
+    "id": "TC023",
+    "title": "Create event form accepts each category option",
+    "description": "Verifies the category dropdown supports selecting each allowed category option for event creation.",
+    "category": "Create Event",
+    "priority": "Medium",
+    "steps": [
+      {
+        "type": "action",
+        "description": "Navigate to /login"
+      },
+      {
+        "type": "action",
+        "description": "Type \"{{LOGIN_USER}}\" into the email field"
+      },
+      {
+        "type": "action",
+        "description": "Type \"{{LOGIN_PASSWORD}}\" into the password field"
+      },
+      {
+        "type": "action",
+        "description": "Click the \"Login\" button"
+      },
+      {
+        "type": "action",
+        "description": "Click the \"Create Event\" link or button"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify URL contains \"/events/create\""
+      }
+    ]
+  },
+  {
+    "id": "TC024",
+    "title": "Organizer updates event details successfully (no image change)",
+    "description": "Verifies an organizer can edit pre-filled fields and submit to see a success toast and reach the event detail page.",
+    "category": "Update Event",
+    "priority": "High",
+    "steps": [
+      {
+        "type": "action",
+        "description": "Navigate to /login"
+      },
+      {
+        "type": "action",
+        "description": "Type \"{{LOGIN_USER}}\" into the email field"
+      },
+      {
+        "type": "action",
+        "description": "Type \"{{LOGIN_PASSWORD}}\" into the password field"
+      },
+      {
+        "type": "action",
+        "description": "Click the \"Login\" button"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify URL contains \"/\""
+      },
+      {
+        "type": "action",
+        "description": "Click on the first visible event card in the events list"
+      },
+      {
+        "type": "action",
+        "description": "Click the \"Edit\" or \"Update\" button on the event detail page"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify text \"Update\" is visible"
+      }
+    ]
+  },
+  {
+    "id": "TC025",
+    "title": "Organizer submits updated event and is redirected to event detail page",
+    "description": "Verifies submission shows a success toast and redirects to the updated event detail page.",
+    "category": "Update Event",
+    "priority": "High",
+    "steps": [
+      {
+        "type": "action",
+        "description": "Navigate to /login"
+      },
+      {
+        "type": "action",
+        "description": "Type \"{{LOGIN_USER}}\" into the email field"
+      },
+      {
+        "type": "action",
+        "description": "Type \"{{LOGIN_PASSWORD}}\" into the password field"
+      },
+      {
+        "type": "action",
+        "description": "Click the \"Login\" button"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify URL contains \"/\""
+      },
+      {
+        "type": "action",
+        "description": "Click on the first visible event card in the events list"
+      },
+      {
+        "type": "action",
+        "description": "Click the \"Edit\" or \"Update\" button on the event detail page"
+      },
+      {
+        "type": "action",
+        "description": "Fill \"Updated Event Title\" into the Title field"
+      },
+      {
+        "type": "action",
+        "description": "Click the \"Submit\" button"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify text \"success\" is visible"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify URL contains \"/events/\""
+      }
+    ]
+  },
+  {
+    "id": "TC026",
+    "title": "Organizer sees pre-filled values on Update Event form",
+    "description": "Verifies the update form is pre-populated with existing event data for an organizer.",
+    "category": "Update Event",
+    "priority": "Medium",
+    "steps": [
+      {
+        "type": "action",
+        "description": "Navigate to /login"
+      },
+      {
+        "type": "action",
+        "description": "Type \"{{LOGIN_USER}}\" into the email field"
+      },
+      {
+        "type": "action",
+        "description": "Type \"{{LOGIN_PASSWORD}}\" into the password field"
+      },
+      {
+        "type": "action",
+        "description": "Click the \"Login\" button"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify URL contains \"/\""
+      },
+      {
+        "type": "action",
+        "description": "Click on the first visible event card in the events list"
+      },
+      {
+        "type": "action",
+        "description": "Click the \"Edit\" or \"Update\" button on the event detail page"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify element \"Title\" is visible"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify element \"Description\" is visible"
+      }
+    ]
+  },
+  {
+    "id": "TC027",
+    "title": "Update submission with missing required title shows validation error",
+    "description": "Verifies client-side validation prevents submission when required fields are invalid and user remains on the update page.",
+    "category": "Update Event",
+    "priority": "High",
+    "steps": [
+      {
+        "type": "action",
+        "description": "Navigate to /login"
+      },
+      {
+        "type": "action",
+        "description": "Type \"{{LOGIN_USER}}\" into the email field"
+      },
+      {
+        "type": "action",
+        "description": "Type \"{{LOGIN_PASSWORD}}\" into the password field"
+      },
+      {
+        "type": "action",
+        "description": "Click the \"Login\" button"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify URL contains \"/\""
+      },
+      {
+        "type": "action",
+        "description": "Click on the first visible event card in the events list"
+      },
+      {
+        "type": "action",
+        "description": "Click the \"Edit\" or \"Update\" button on the event detail page"
+      },
+      {
+        "type": "action",
+        "description": "Fill \"\" into the Title field"
+      },
+      {
+        "type": "action",
+        "description": "Click the \"Submit\" button"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify text \"required\" is visible"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify URL contains \"/update\""
+      }
+    ]
+  },
+  {
+    "id": "TC028",
+    "title": "Update submission with invalid date range shows validation error",
+    "description": "Verifies invalid date inputs show an error and do not redirect away from the update page.",
+    "category": "Update Event",
+    "priority": "Medium",
+    "steps": [
+      {
+        "type": "action",
+        "description": "Navigate to /login"
+      },
+      {
+        "type": "action",
+        "description": "Type \"{{LOGIN_USER}}\" into the email field"
+      },
+      {
+        "type": "action",
+        "description": "Type \"{{LOGIN_PASSWORD}}\" into the password field"
+      },
+      {
+        "type": "action",
+        "description": "Click the \"Login\" button"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify URL contains \"/\""
+      },
+      {
+        "type": "action",
+        "description": "Click on the first visible event card in the events list"
+      },
+      {
+        "type": "action",
+        "description": "Click the \"Edit\" or \"Update\" button on the event detail page"
+      },
+      {
+        "type": "action",
+        "description": "Fill \"01/01/2000\" into the Start Date field"
+      },
+      {
+        "type": "action",
+        "description": "Fill \"01/01/1999\" into the End Date field"
+      },
+      {
+        "type": "action",
+        "description": "Click the \"Submit\" button"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify text \"date\" is visible"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify URL contains \"/update\""
+      }
+    ]
+  },
+  {
+    "id": "TC029",
+    "title": "Organizer deletes an event from the event detail page and is redirected to Home",
+    "description": "Verifies an organizer can delete their event via the confirmation modal and the app redirects to the Home page after deletion.",
+    "category": "Delete Event",
+    "priority": "High",
+    "steps": [
+      {
+        "type": "action",
+        "description": "Navigate to /login"
+      },
+      {
+        "type": "action",
+        "description": "Type \"{{LOGIN_USER}}\" into the email field"
+      },
+      {
+        "type": "action",
+        "description": "Type \"{{LOGIN_PASSWORD}}\" into the password field"
+      },
+      {
+        "type": "action",
+        "description": "Click the Log in button"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify URL contains \"/\""
+      },
+      {
+        "type": "action",
+        "description": "Click on an event card that you are the organizer of"
+      },
+      {
+        "type": "action",
+        "description": "Click the Delete button on the event detail page"
+      },
+      {
+        "type": "action",
+        "description": "Click the Confirm button in the deletion confirmation modal"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify URL contains \"/\""
+      }
+    ]
+  },
+  {
+    "id": "TC030",
+    "title": "Organizer cancels deletion from event detail page and event remains visible",
+    "description": "Verifies canceling the delete confirmation closes the modal and leaves the event unchanged.",
+    "category": "Delete Event",
+    "priority": "High",
+    "steps": [
+      {
+        "type": "action",
+        "description": "Navigate to /login"
+      },
+      {
+        "type": "action",
+        "description": "Type \"{{LOGIN_USER}}\" into the email field"
+      },
+      {
+        "type": "action",
+        "description": "Type \"{{LOGIN_PASSWORD}}\" into the password field"
+      },
+      {
+        "type": "action",
+        "description": "Click the Log in button"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify URL contains \"/\""
+      },
+      {
+        "type": "action",
+        "description": "Click on an event card that you are the organizer of"
+      },
+      {
+        "type": "action",
+        "description": "Click the Delete button on the event detail page"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify text \"Are you sure\" is visible"
+      },
+      {
+        "type": "action",
+        "description": "Click the Cancel button in the deletion confirmation modal"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify element \"Delete\" is visible"
+      }
+    ]
+  },
+  {
+    "id": "TC031",
+    "title": "Non-organizer cannot see Delete control on event detail page",
+    "description": "Verifies a user who is not the organizer is not presented with a delete option on the event detail page.",
+    "category": "Delete Event",
+    "priority": "High",
+    "steps": [
+      {
+        "type": "action",
+        "description": "Navigate to /login"
+      },
+      {
+        "type": "action",
+        "description": "Type \"{{LOGIN_USER}}\" into the email field"
+      },
+      {
+        "type": "action",
+        "description": "Type \"{{LOGIN_PASSWORD}}\" into the password field"
+      },
+      {
+        "type": "action",
+        "description": "Click the Log in button"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify URL contains \"/\""
+      },
+      {
+        "type": "action",
+        "description": "Click on an event card that you are NOT the organizer of"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify page title contains \"Event\""
+      },
+      {
+        "type": "assertion",
+        "description": "Verify text \"Delete\" is not visible"
+      }
+    ]
+  },
+  {
+    "id": "TC032",
+    "title": "Organizer deletes an event from an event card confirmation modal (listing page)",
+    "description": "Verifies deleting from an event card uses a confirmation modal and the deleted event no longer appears in the list.",
+    "category": "Delete Event",
+    "priority": "Medium",
+    "steps": [
+      {
+        "type": "action",
+        "description": "Navigate to /login"
+      },
+      {
+        "type": "action",
+        "description": "Type \"{{LOGIN_USER}}\" into the email field"
+      },
+      {
+        "type": "action",
+        "description": "Type \"{{LOGIN_PASSWORD}}\" into the password field"
+      },
+      {
+        "type": "action",
+        "description": "Click the Log in button"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify URL contains \"/\""
+      },
+      {
+        "type": "action",
+        "description": "Scroll to an event card that you are the organizer of"
+      },
+      {
+        "type": "action",
+        "description": "Click Delete on that event card"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify text \"Are you sure\" is visible"
+      },
+      {
+        "type": "action",
+        "description": "Click the Confirm button in the deletion confirmation modal"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify text \"Event\" is not visible"
+      }
+    ]
+  },
+  {
+    "id": "TC033",
+    "title": "Organizer cancels deletion from an event card modal and remains on the listing page",
+    "description": "Verifies canceling a delete action from an event card closes the modal and does not remove the event card.",
+    "category": "Delete Event",
+    "priority": "Medium",
+    "steps": [
+      {
+        "type": "action",
+        "description": "Navigate to /login"
+      },
+      {
+        "type": "action",
+        "description": "Type \"{{LOGIN_USER}}\" into the email field"
+      },
+      {
+        "type": "action",
+        "description": "Type \"{{LOGIN_PASSWORD}}\" into the password field"
+      },
+      {
+        "type": "action",
+        "description": "Click the Log in button"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify URL contains \"/\""
+      },
+      {
+        "type": "action",
+        "description": "Scroll to an event card that you are the organizer of"
+      },
+      {
+        "type": "action",
+        "description": "Click Delete on that event card"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify text \"Are you sure\" is visible"
+      },
+      {
+        "type": "action",
+        "description": "Click the Cancel button in the deletion confirmation modal"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify element \"Delete\" is visible"
+      }
+    ]
+  },
+  {
+    "id": "TC034",
+    "title": "Delete confirmation modal can be dismissed without deletion (Escape key)",
+    "description": "Verifies the confirmation modal can be dismissed via keyboard and the event is not deleted.",
+    "category": "Delete Event",
+    "priority": "Low",
+    "steps": [
+      {
+        "type": "action",
+        "description": "Navigate to /login"
+      },
+      {
+        "type": "action",
+        "description": "Type \"{{LOGIN_USER}}\" into the email field"
+      },
+      {
+        "type": "action",
+        "description": "Type \"{{LOGIN_PASSWORD}}\" into the password field"
+      },
+      {
+        "type": "action",
+        "description": "Click the Log in button"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify URL contains \"/\""
+      },
+      {
+        "type": "action",
+        "description": "Click on an event card that you are the organizer of"
+      },
+      {
+        "type": "action",
+        "description": "Click the Delete button on the event detail page"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify text \"Are you sure\" is visible"
+      },
+      {
+        "type": "action",
+        "description": "Press Escape"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify element \"Delete\" is visible"
+      }
+    ]
+  },
+  {
+    "id": "TC035",
+    "title": "After deletion, deleted event is not accessible from Home list",
+    "description": "Verifies the app revalidation removes the deleted event from the Home page listing after a successful delete.",
+    "category": "Delete Event",
+    "priority": "Medium",
+    "steps": [
+      {
+        "type": "action",
+        "description": "Navigate to /login"
+      },
+      {
+        "type": "action",
+        "description": "Type \"{{LOGIN_USER}}\" into the email field"
+      },
+      {
+        "type": "action",
+        "description": "Type \"{{LOGIN_PASSWORD}}\" into the password field"
+      },
+      {
+        "type": "action",
+        "description": "Click the Log in button"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify URL contains \"/\""
+      },
+      {
+        "type": "action",
+        "description": "Click on an event card that you are the organizer of"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify element \"Delete\" is visible"
+      },
+      {
+        "type": "action",
+        "description": "Click the Delete button on the event detail page"
+      },
+      {
+        "type": "action",
+        "description": "Click the Confirm button in the deletion confirmation modal"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify URL contains \"/\""
+      },
+      {
+        "type": "assertion",
+        "description": "Verify text \"Delete\" is not visible"
+      }
+    ]
+  },
+  {
+    "id": "TC036",
+    "title": "Update only the display name successfully",
+    "description": "Verifies an authenticated user can change only their display name and receive a success confirmation.",
+    "category": "Update Profile",
+    "priority": "Medium",
+    "steps": [
+      {
+        "type": "action",
+        "description": "Navigate to /login"
+      },
+      {
+        "type": "action",
+        "description": "Type \"{{LOGIN_USER}}\" into the email field"
+      },
+      {
+        "type": "action",
+        "description": "Type \"{{LOGIN_PASSWORD}}\" into the password field"
+      },
+      {
+        "type": "action",
+        "description": "Click the \"Login\" button"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify URL contains \"/profile\""
+      },
+      {
+        "type": "action",
+        "description": "Edit name input field"
+      },
+      {
+        "type": "action",
+        "description": "Click Update button"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify text \"success\" is visible"
+      }
+    ]
+  },
+  {
+    "id": "TC037",
+    "title": "Validation prevents updating when name field is cleared",
+    "description": "Verifies the profile form blocks submission when the display name is emptied and shows a visible validation message.",
+    "category": "Update Profile",
+    "priority": "Medium",
+    "steps": [
+      {
+        "type": "action",
+        "description": "Navigate to /login"
+      },
+      {
+        "type": "action",
+        "description": "Type \"{{LOGIN_USER}}\" into the email field"
+      },
+      {
+        "type": "action",
+        "description": "Type \"{{LOGIN_PASSWORD}}\" into the password field"
+      },
+      {
+        "type": "action",
+        "description": "Click the \"Login\" button"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify URL contains \"/profile\""
+      },
+      {
+        "type": "action",
+        "description": "Click the name input field"
+      },
+      {
+        "type": "action",
+        "description": "Press Backspace"
+      },
+      {
+        "type": "action",
+        "description": "Click Update button"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify text \"required\" is visible"
+      }
+    ]
+  },
+  {
+    "id": "TC038",
+    "title": "Navbar logo is visible and clicking it returns to Home",
+    "description": "Verifies the Next-Events logo is present in the navbar and clicking it navigates to the home page.",
+    "category": "Navigation",
+    "priority": "High",
+    "steps": [
+      {
+        "type": "action",
+        "description": "Navigate to /"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify element \"Next-Events logo\" is visible"
+      },
+      {
+        "type": "action",
+        "description": "Click on \"Next-Events\" logo in the navbar"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify URL contains \"/\""
+      },
+      {
+        "type": "assertion",
+        "description": "Verify page title contains \"Next-Events\""
+      }
+    ]
+  },
+  {
+    "id": "TC039",
+    "title": "Authenticated avatar dropdown shows Profile, Create Event, and Sign Out",
+    "description": "Verifies that an authenticated user can open the avatar dropdown and see Profile, Create Event, and Sign Out options.",
+    "category": "Navigation",
+    "priority": "High",
+    "steps": [
+      {
+        "type": "action",
+        "description": "Navigate to /login"
+      },
+      {
+        "type": "action",
+        "description": "Type \"{{LOGIN_USER}}\" into the email field"
+      },
+      {
+        "type": "action",
+        "description": "Type \"{{LOGIN_PASSWORD}}\" into the password field"
+      },
+      {
+        "type": "action",
+        "description": "Click on \"Sign in\""
+      },
+      {
+        "type": "assertion",
+        "description": "Verify URL contains \"/\""
+      },
+      {
+        "type": "action",
+        "description": "Click on the user avatar in the navbar"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify text \"Profile\" is visible"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify text \"Create Event\" is visible"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify text \"Sign Out\" is visible"
+      }
+    ]
+  },
+  {
+    "id": "TC040",
+    "title": "Authenticated user can navigate to Profile from avatar dropdown",
+    "description": "Verifies that an authenticated user can reach the Profile page using the navbar avatar dropdown.",
+    "category": "Navigation",
+    "priority": "High",
+    "steps": [
+      {
+        "type": "action",
+        "description": "Navigate to /login"
+      },
+      {
+        "type": "action",
+        "description": "Type \"{{LOGIN_USER}}\" into the email field"
+      },
+      {
+        "type": "action",
+        "description": "Type \"{{LOGIN_PASSWORD}}\" into the password field"
+      },
+      {
+        "type": "action",
+        "description": "Click on \"Sign in\""
+      },
+      {
+        "type": "assertion",
+        "description": "Verify URL contains \"/\""
+      },
+      {
+        "type": "action",
+        "description": "Click on the user avatar in the navbar"
+      },
+      {
+        "type": "action",
+        "description": "Click on \"Profile\""
+      },
+      {
+        "type": "assertion",
+        "description": "Verify URL contains \"/profile\""
+      }
+    ]
+  },
+  {
+    "id": "TC041",
+    "title": "Authenticated user can navigate to Create Event from avatar dropdown",
+    "description": "Verifies that an authenticated user can reach the Create Event page using the navbar avatar dropdown.",
+    "category": "Navigation",
+    "priority": "High",
+    "steps": [
+      {
+        "type": "action",
+        "description": "Navigate to /login"
+      },
+      {
+        "type": "action",
+        "description": "Type \"{{LOGIN_USER}}\" into the email field"
+      },
+      {
+        "type": "action",
+        "description": "Type \"{{LOGIN_PASSWORD}}\" into the password field"
+      },
+      {
+        "type": "action",
+        "description": "Click on \"Sign in\""
+      },
+      {
+        "type": "assertion",
+        "description": "Verify URL contains \"/\""
+      },
+      {
+        "type": "action",
+        "description": "Click on the user avatar in the navbar"
+      },
+      {
+        "type": "action",
+        "description": "Click on \"Create Event\""
+      },
+      {
+        "type": "assertion",
+        "description": "Verify URL contains \"/events/create\""
+      }
+    ]
+  },
+  {
+    "id": "TC042",
+    "title": "Authenticated user can sign out from avatar dropdown",
+    "description": "Verifies that an authenticated user can sign out via the navbar and returns to unauthenticated navigation state.",
+    "category": "Navigation",
+    "priority": "High",
+    "steps": [
+      {
+        "type": "action",
+        "description": "Navigate to /login"
+      },
+      {
+        "type": "action",
+        "description": "Type \"{{LOGIN_USER}}\" into the email field"
+      },
+      {
+        "type": "action",
+        "description": "Type \"{{LOGIN_PASSWORD}}\" into the password field"
+      },
+      {
+        "type": "action",
+        "description": "Click on \"Sign in\""
+      },
+      {
+        "type": "assertion",
+        "description": "Verify URL contains \"/\""
+      },
+      {
+        "type": "action",
+        "description": "Click on the user avatar in the navbar"
+      },
+      {
+        "type": "action",
+        "description": "Click on \"Sign Out\""
+      },
+      {
+        "type": "assertion",
+        "description": "Verify element \"Login\" is visible"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify element \"Sign Up\" is visible"
+      }
+    ]
+  }
+]
